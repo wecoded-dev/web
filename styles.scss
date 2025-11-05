@@ -1,0 +1,1230 @@
+// Ultra Premium Dark Neon Theme SCSS
+// Variables
+$colors: (
+  primary: #030303,
+  secondary: #0a0a0a,
+  tertiary: #111111,
+  card: rgba(15, 15, 15, 0.8),
+  glass: rgba(255, 255, 255, 0.05),
+  border-primary: rgba(255, 255, 255, 0.1),
+  border-secondary: rgba(255, 255, 255, 0.05)
+);
+
+$neon-colors: (
+  purple: #a855f7,
+  cyan: #06b6d4,
+  blue: #3b82f6,
+  green: #10b981,
+  pink: #ec4899,
+  orange: #f59e0b
+);
+
+$gradients: (
+  primary: linear-gradient(135deg, map-get($neon-colors, purple), map-get($neon-colors, cyan)),
+  secondary: linear-gradient(135deg, map-get($neon-colors, blue), map-get($neon-colors, green)),
+  tertiary: linear-gradient(135deg, map-get($neon-colors, pink), map-get($neon-colors, orange)),
+  glass: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(6, 182, 212, 0.1))
+);
+
+$typography: (
+  primary: 'Inter', sans-serif,
+  mono: ('JetBrains Mono', 'Fira Code', monospace),
+  text-primary: #ffffff,
+  text-secondary: rgba(255, 255, 255, 0.8),
+  text-tertiary: rgba(255, 255, 255, 0.6),
+  text-muted: rgba(255, 255, 255, 0.4)
+);
+
+$spacing: (
+  xs: 0.25rem,
+  sm: 0.5rem,
+  md: 1rem,
+  lg: 1.5rem,
+  xl: 2rem,
+  "2xl": 3rem,
+  "3xl": 4rem,
+  "4xl": 6rem,
+  "5xl": 8rem
+);
+
+$radius: (
+  sm: 0.375rem,
+  md: 0.5rem,
+  lg: 0.75rem,
+  xl: 1rem,
+  "2xl": 1.5rem,
+  full: 9999px
+);
+
+$transitions: (
+  fast: 0.15s ease,
+  normal: 0.3s ease,
+  slow: 0.5s ease,
+  bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+);
+
+// Mixins
+@mixin gradient-text($gradient) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@mixin neon-glow($color, $size: 20px) {
+  box-shadow: 0 0 $size rgba($color, 0.5);
+}
+
+@mixin multi-glow($colors: ()) {
+  $shadows: ();
+  @each $color, $alpha in $colors {
+    $shadows: append($shadows, 0 0 10px rgba($color, $alpha), comma);
+  }
+  box-shadow: $shadows;
+}
+
+@mixin glass-effect($blur: 10px) {
+  background: map-get($colors, glass);
+  backdrop-filter: blur($blur);
+  border: 1px solid map-get($colors, border-primary);
+}
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: 768px) { @content; }
+  }
+  @if $breakpoint == tablet {
+    @media (max-width: 1024px) { @content; }
+  }
+  @if $breakpoint == desktop {
+    @media (min-width: 1025px) { @content; }
+  }
+}
+
+// Base Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: map-get($typography, primary);
+  background-color: map-get($colors, primary);
+  color: map-get($typography, text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: map-get($spacing, md);
+}
+
+.hero-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  @include gradient-text(linear-gradient(135deg, map-get($typography, text-primary) 0%, map-get($typography, text-secondary) 100%));
+  margin-bottom: map-get($spacing, xl);
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  text-align: center;
+  margin-bottom: map-get($spacing, lg);
+}
+
+.gradient-text {
+  @include gradient-text(map-get($gradients, primary));
+}
+
+// Buttons
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: map-get($spacing, sm);
+  padding: map-get($spacing, md) map-get($spacing, xl);
+  border: none;
+  border-radius: map-get($radius, full);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all map-get($transitions, normal);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left map-get($transitions, normal);
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
+
+  // Button Variants
+  &-primary {
+    background: map-get($gradients, primary);
+    color: white;
+    @include neon-glow(map-get($neon-colors, purple));
+
+    &:hover {
+      transform: translateY(-2px);
+      @include neon-glow(map-get($neon-colors, purple), 30px);
+    }
+  }
+
+  &-secondary {
+    @include glass-effect();
+    color: map-get($typography, text-primary);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: map-get($neon-colors, cyan);
+      @include neon-glow(map-get($neon-colors, cyan));
+    }
+  }
+
+  &-outline {
+    background: transparent;
+    color: map-get($typography, text-primary);
+    border: 1px solid map-get($colors, border-primary);
+
+    &:hover {
+      border-color: map-get($neon-colors, purple);
+      @include neon-glow(map-get($neon-colors, purple));
+    }
+  }
+
+  // Button Sizes
+  &-xl {
+    padding: map-get($spacing, lg) map-get($spacing, "2xl");
+    font-size: 1.125rem;
+  }
+
+  &-block {
+    width: 100%;
+  }
+}
+
+// Navigation
+.floating-nav {
+  position: fixed;
+  top: map-get($spacing, lg);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  @include glass-effect(20px);
+  border-radius: map-get($radius, full);
+  z-index: 1000;
+  transition: all map-get($transitions, normal);
+
+  &.scrolled {
+    top: map-get($spacing, md);
+    width: 95%;
+    background: rgba(10, 10, 10, 0.9);
+  }
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: map-get($spacing, md) map-get($spacing, xl);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: map-get($spacing, sm);
+}
+
+.logo-orb {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: map-get($gradients, primary);
+  @include neon-glow(map-get($neon-colors, purple));
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 1.25rem;
+  @include gradient-text(map-get($gradients, primary));
+}
+
+.nav-menu {
+  display: flex;
+  gap: map-get($spacing, xl);
+
+  @include responsive(mobile) {
+    display: none;
+  }
+}
+
+.nav-link {
+  color: map-get($typography, text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all map-get($transitions, fast);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: map-get($gradients, primary);
+    transition: width map-get($transitions, normal);
+  }
+
+  &:hover,
+  &.active {
+    color: map-get($typography, text-primary);
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+.nav-actions {
+  display: flex;
+  gap: map-get($spacing, md);
+
+  @include responsive(mobile) {
+    display: none;
+  }
+}
+
+.nav-btn {
+  padding: map-get($spacing, sm) map-get($spacing, lg);
+  border: none;
+  border-radius: map-get($radius, full);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all map-get($transitions, normal);
+
+  &.primary {
+    background: map-get($gradients, primary);
+    color: white;
+  }
+
+  &.secondary {
+    background: transparent;
+    color: map-get($typography, text-primary);
+    border: 1px solid map-get($colors, border-primary);
+  }
+}
+
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  @include responsive(mobile) {
+    display: flex;
+  }
+
+  span {
+    width: 20px;
+    height: 2px;
+    background: map-get($typography, text-primary);
+    transition: all map-get($transitions, normal);
+  }
+}
+
+// Hero Section
+.hero-section {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.hero-content {
+  width: 100%;
+  padding-top: map-get($spacing, "5xl");
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: map-get($spacing, sm);
+  @include glass-effect();
+  border-radius: map-get($radius, full);
+  padding: map-get($spacing, sm) map-get($spacing, lg);
+  margin-bottom: map-get($spacing, xl);
+}
+
+.badge-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: map-get($neon-colors, green);
+  @include neon-glow(map-get($neon-colors, green), 10px);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: map-get($typography, text-secondary);
+  margin-bottom: map-get($spacing, "2xl");
+  max-width: 600px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: map-get($spacing, "2xl");
+  margin-bottom: map-get($spacing, "2xl");
+
+  @include responsive(mobile) {
+    flex-direction: column;
+    gap: map-get($spacing, lg);
+  }
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  @include gradient-text(map-get($gradients, primary));
+  margin-bottom: map-get($spacing, xs);
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: map-get($typography, text-tertiary);
+}
+
+.hero-actions {
+  display: flex;
+  gap: map-get($spacing, md);
+  flex-wrap: wrap;
+
+  @include responsive(mobile) {
+    flex-direction: column;
+  }
+}
+
+.hero-visual {
+  position: relative;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include responsive(tablet) {
+    height: 500px;
+  }
+
+  @include responsive(mobile) {
+    height: 400px;
+    margin-top: map-get($spacing, "2xl");
+  }
+}
+
+.orb-cluster {
+  position: relative;
+  width: 400px;
+  height: 400px;
+
+  @include responsive(tablet) {
+    width: 300px;
+    height: 300px;
+  }
+
+  @include responsive(mobile) {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+.main-orb {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: map-get($gradients, primary);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  @include multi-glow((map-get($neon-colors, purple): 0.3, map-get($neon-colors, cyan): 0.2, map-get($neon-colors, blue): 0.1));
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-orb {
+  position: absolute;
+  border-radius: 50%;
+  background: map-get($gradients, secondary);
+  @include neon-glow(map-get($neon-colors, cyan));
+  animation: float 4s ease-in-out infinite;
+}
+
+// Orb positions and variations
+.orb-1 {
+  width: 80px;
+  height: 80px;
+  top: 20%;
+  left: 20%;
+  animation-delay: -1s;
+}
+
+.orb-2 {
+  width: 60px;
+  height: 60px;
+  top: 10%;
+  right: 20%;
+  animation-delay: -2s;
+  background: map-get($gradients, tertiary);
+}
+
+.orb-3 {
+  width: 40px;
+  height: 40px;
+  bottom: 30%;
+  left: 10%;
+  animation-delay: -3s;
+}
+
+.orb-4 {
+  width: 50px;
+  height: 50px;
+  bottom: 20%;
+  right: 30%;
+  animation-delay: -4s;
+}
+
+.orb-5 {
+  width: 30px;
+  height: 30px;
+  top: 40%;
+  right: 10%;
+  animation-delay: -5s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.05); }
+}
+
+.code-preview {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 400px;
+  background: map-get($colors, card);
+  border: 1px solid map-get($colors, border-primary);
+  border-radius: map-get($radius, xl);
+  overflow: hidden;
+  @include glass-effect();
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  @include responsive(tablet) {
+    width: 300px;
+  }
+
+  @include responsive(mobile) {
+    position: relative;
+    width: 100%;
+    margin-top: map-get($spacing, "2xl");
+  }
+}
+
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: map-get($spacing, md);
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid map-get($colors, border-primary);
+}
+
+.code-dots {
+  display: flex;
+  gap: 6px;
+
+  span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+
+    &:nth-child(1) { background: #ff5f57; }
+    &:nth-child(2) { background: #ffbd2e; }
+    &:nth-child(3) { background: #28ca42; }
+  }
+}
+
+.code-title {
+  font-family: map-get($typography, mono);
+  font-size: 0.875rem;
+  color: map-get($typography, text-tertiary);
+}
+
+.code-content {
+  padding: map-get($spacing, lg);
+  margin: 0;
+  background: transparent;
+  font-family: map-get($typography, mono);
+  font-size: 0.875rem;
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: map-get($spacing, "2xl");
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scroll-arrow {
+  width: 20px;
+  height: 30px;
+  border: 2px solid map-get($typography, text-tertiary);
+  border-radius: map-get($radius, full);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 8px;
+    background: map-get($typography, text-tertiary);
+    border-radius: map-get($radius, full);
+    animation: scroll 2s infinite;
+  }
+}
+
+@keyframes scroll {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50% { transform: translateX(-50%) translateY(10px); opacity: 0; }
+}
+
+// Trust Bar
+.trust-bar {
+  padding: map-get($spacing, "3xl") 0;
+  background: map-get($colors, secondary);
+  border-top: 1px solid map-get($colors, border-primary);
+  border-bottom: 1px solid map-get($colors, border-primary);
+}
+
+.trust-title {
+  text-align: center;
+  color: map-get($typography, text-tertiary);
+  margin-bottom: map-get($spacing, "2xl");
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.trust-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: map-get($spacing, "3xl");
+  flex-wrap: wrap;
+}
+
+.logo-item {
+  opacity: 0.6;
+  transition: all map-get($transitions, normal);
+  filter: grayscale(1);
+
+  &:hover {
+    opacity: 1;
+    filter: grayscale(0);
+    transform: translateY(-2px);
+  }
+}
+
+// Features Section
+.features-section {
+  padding: map-get($spacing, "5xl") 0;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: map-get($spacing, "2xl");
+  margin-top: map-get($spacing, "4xl");
+}
+
+.feature-card {
+  background: map-get($colors, card);
+  border: 1px solid map-get($colors, border-primary);
+  border-radius: map-get($radius, "2xl");
+  padding: map-get($spacing, "2xl");
+  position: relative;
+  transition: all map-get($transitions, normal);
+  @include glass-effect();
+
+  &:hover {
+    transform: translateY(-8px);
+    border-color: map-get($neon-colors, purple);
+    @include multi-glow((map-get($neon-colors, purple): 0.3, map-get($neon-colors, cyan): 0.2, map-get($neon-colors, blue): 0.1));
+  }
+}
+
+.feature-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: map-get($radius, lg);
+  background: map-get($gradients, glass);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: map-get($spacing, lg);
+  font-size: 1.5rem;
+  color: map-get($neon-colors, cyan);
+}
+
+.feature-title {
+  font-size: 1.5rem;
+  margin-bottom: map-get($spacing, md);
+}
+
+.feature-description {
+  color: map-get($typography, text-secondary);
+  margin-bottom: map-get($spacing, lg);
+}
+
+.feature-list {
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacing, sm);
+    margin-bottom: map-get($spacing, sm);
+    color: map-get($typography, text-secondary);
+  }
+
+  i {
+    color: map-get($neon-colors, green);
+  }
+}
+
+.feature-badge {
+  position: absolute;
+  top: map-get($spacing, xl);
+  right: map-get($spacing, xl);
+  background: map-get($gradients, primary);
+  color: white;
+  padding: map-get($spacing, xs) map-get($spacing, md);
+  border-radius: map-get($radius, full);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+// Pricing Section
+.pricing-section {
+  padding: map-get($spacing, "5xl") 0;
+  background: map-get($colors, secondary);
+}
+
+.pricing-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: map-get($spacing, md);
+  margin-bottom: map-get($spacing, "4xl");
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: map-get($colors, glass);
+  border: 1px solid map-get($colors, border-primary);
+  border-radius: map-get($radius, full);
+  transition: map-get($transitions, normal);
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 3px;
+    background: map-get($gradients, primary);
+    border-radius: 50%;
+    transition: map-get($transitions, normal);
+  }
+
+  input:checked + & {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: map-get($neon-colors, purple);
+
+    &::before {
+      transform: translateX(30px);
+    }
+  }
+}
+
+.discount-badge {
+  background: map-get($neon-colors, green);
+  color: black;
+  padding: 2px 6px;
+  border-radius: map-get($radius, sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: map-get($spacing, "2xl");
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  background: map-get($colors, card);
+  border: 1px solid map-get($colors, border-primary);
+  border-radius: map-get($radius, "2xl");
+  padding: map-get($spacing, "2xl");
+  position: relative;
+  transition: all map-get($transitions, normal);
+  @include glass-effect();
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: map-get($neon-colors, cyan);
+    @include neon-glow(map-get($neon-colors, cyan));
+  }
+
+  &.featured {
+    border-color: map-get($neon-colors, purple);
+    @include neon-glow(map-get($neon-colors, purple));
+    transform: scale(1.05);
+
+    &:hover {
+      transform: scale(1.05) translateY(-5px);
+    }
+
+    @include responsive(mobile) {
+      transform: none;
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+    }
+  }
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: map-get($gradients, primary);
+  color: white;
+  padding: map-get($spacing, xs) map-get($spacing, lg);
+  border-radius: map-get($radius, full);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: map-get($spacing, "2xl");
+  padding-bottom: map-get($spacing, xl);
+  border-bottom: 1px solid map-get($colors, border-primary);
+}
+
+.plan-name {
+  font-size: 1.5rem;
+  margin-bottom: map-get($spacing, md);
+}
+
+.plan-price {
+  margin-bottom: map-get($spacing, md);
+}
+
+.currency {
+  font-size: 1.5rem;
+  vertical-align: top;
+}
+
+.amount {
+  font-size: 3rem;
+  font-weight: 700;
+  @include gradient-text(map-get($gradients, primary));
+}
+
+.period {
+  color: map-get($typography, text-tertiary);
+  font-size: 1rem;
+}
+
+.plan-description {
+  color: map-get($typography, text-secondary);
+}
+
+.plan-features {
+  list-style: none;
+  margin-bottom: map-get($spacing, "2xl");
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacing, sm);
+    margin-bottom: map-get($spacing, md);
+    color: map-get($typography, text-secondary);
+  }
+
+  i {
+    font-size: 1.125rem;
+  }
+
+  .ri-check-line {
+    color: map-get($neon-colors, green);
+  }
+
+  .ri-close-line {
+    color: map-get($typography, text-muted);
+  }
+}
+
+// Testimonials Section
+.testimonials-section {
+  padding: map-get($spacing, "5xl") 0;
+}
+
+.testimonials-slider {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.testimonial-card {
+  background: map-get($colors, card);
+  border: 1px solid map-get($colors, border-primary);
+  border-radius: map-get($radius, "2xl");
+  padding: map-get($spacing, "3xl");
+  @include glass-effect();
+}
+
+.quote-icon {
+  font-size: 3rem;
+  color: map-get($neon-colors, purple);
+  margin-bottom: map-get($spacing, lg);
+  opacity: 0.5;
+}
+
+.testimonial-text {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: map-get($typography, text-secondary);
+  margin-bottom: map-get($spacing, "2xl");
+  font-style: italic;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: map-get($spacing, md);
+
+  img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+.author-info {
+  h4 {
+    margin-bottom: map-get($spacing, xs);
+    font-size: 1.125rem;
+  }
+
+  p {
+    color: map-get($typography, text-tertiary);
+    margin: 0;
+  }
+}
+
+// CTA Section
+.cta-section {
+  padding: map-get($spacing, "5xl") 0;
+  background: map-get($colors, secondary);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 30% 70%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 70% 30%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+}
+
+.cta-content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: map-get($spacing, lg);
+}
+
+.cta-subtitle {
+  font-size: 1.25rem;
+  color: map-get($typography, text-secondary);
+  margin-bottom: map-get($spacing, "3xl");
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-actions {
+  display: flex;
+  gap: map-get($spacing, md);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: map-get($spacing, lg);
+
+  @include responsive(mobile) {
+    flex-direction: column;
+  }
+}
+
+.cta-note {
+  color: map-get($typography, text-tertiary);
+  font-size: 0.875rem;
+}
+
+// Footer
+.footer {
+  background: map-get($colors, primary);
+  border-top: 1px solid map-get($colors, border-primary);
+  padding: map-get($spacing, "4xl") 0 map-get($spacing, "2xl");
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: map-get($spacing, "3xl");
+  margin-bottom: map-get($spacing, "3xl");
+
+  @include responsive(tablet) {
+    grid-template-columns: 1fr 1fr;
+    gap: map-get($spacing, "2xl");
+  }
+
+  @include responsive(mobile) {
+    grid-template-columns: 1fr;
+    gap: map-get($spacing, "2xl");
+  }
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: map-get($spacing, md);
+}
+
+.footer-description {
+  color: map-get($typography, text-secondary);
+  max-width: 300px;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: map-get($spacing, "2xl");
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: map-get($spacing, "2xl");
+  border-top: 1px solid map-get($colors, border-primary);
+  color: map-get($typography, text-tertiary);
+  font-size: 0.875rem;
+
+  @include responsive(mobile) {
+    flex-direction: column;
+    gap: map-get($spacing, md);
+    text-align: center;
+  }
+}
+
+.footer-social {
+  display: flex;
+  gap: map-get($spacing, md);
+
+  a {
+    color: map-get($typography, text-tertiary);
+    font-size: 1.25rem;
+    transition: color map-get($transitions, fast);
+
+    &:hover {
+      color: map-get($neon-colors, cyan);
+    }
+  }
+}
+
+// Preloader
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: map-get($colors, primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+
+  &.fade-out {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.preloader-content {
+  text-align: center;
+}
+
+.neon-loader {
+  display: flex;
+  gap: map-get($spacing, md);
+  margin-bottom: map-get($spacing, lg);
+}
+
+.loader-orb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: map-get($gradients, primary);
+  animation: loader-bounce 1.4s infinite ease-in-out;
+
+  &:nth-child(1) { animation-delay: -0.32s; }
+  &:nth-child(2) { animation-delay: -0.16s; }
+}
+
+@keyframes loader-bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+.loading-text {
+  color: map-get($typography, text-secondary);
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+}
+
+// Accessibility
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Focus styles
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid map-get($neon-colors, cyan);
+  outline-offset: 2px;
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  :root {
+    --bg-primary: #000000;
+    --bg-secondary: #111111;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+  }
+}
