@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonGrid Pro - Ultimate Postgres Platform</title>
+    <meta name="description" content="Enterprise-grade Postgres with neon-powered performance, global scale, and instant provisioning">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swiper/10.0.4/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="neon-theme">
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <div class="neon-loader">
+                <div class="loader-orb"></div>
+                <div class="loader-orb"></div>
+                <div class="loader-orb"></div>
+            </div>
+            <p class="loading-text">Initializing NeonGrid System</p>
+        </div>
+    </div>
+
+    <!-- Floating Navigation -->
+    <nav class="floating-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="logo-orb"></div>
+                <span class="logo-text">NeonGrid Pro</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="#showcase" class="nav-link">Showcase</a>
+                <a href="#docs" class="nav-link">Docs</a>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="nav-btn secondary">Sign In</button>
+                <button class="nav-btn primary">Get Started</button>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="particles-container" id="particles-js"></div>
+        
+        <div class="hero-content">
+            <div class="container-xl">
+                <div class="row align-items-center min-vh-100">
+                    <div class="col-lg-6">
+                        <div class="hero-badge">
+                            <span class="badge-pulse"></span>
+                            <span>v2.0 Released - Edge Computing Enabled</span>
+                        </div>
+                        
+                        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                            The Future of <span class="gradient-text">Postgres</span> is Here
+                        </h1>
+                        
+                        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="300">
+                            Enterprise-grade distributed Postgres with global scale, quantum encryption, 
+                            and AI-powered optimization. Deploy in milliseconds, scale infinitely.
+                        </p>
+                        
+                        <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                            <div class="stat-item">
+                                <div class="stat-value">99.999%</div>
+                                <div class="stat-label">Uptime SLA</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">2ms</div>
+                                <div class="stat-label">Global Latency</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">∞</div>
+                                <div class="stat-label">Horizontal Scale</div>
+                            </div>
+                        </div>
+                        
+                        <div class="hero-actions" data-aos="fade-up" data-aos-delay="500">
+                            <button class="btn btn-primary btn-xl">
+                                <i class="ri-rocket-2-line"></i>
+                                Launch Project
+                            </button>
+                            <button class="btn btn-secondary btn-xl">
+                                <i class="ri-play-circle-line"></i>
+                                Watch Demo
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="hero-visual">
+                            <div class="orb-cluster">
+                                <div class="main-orb"></div>
+                                <div class="floating-orb orb-1"></div>
+                                <div class="floating-orb orb-2"></div>
+                                <div class="floating-orb orb-3"></div>
+                                <div class="floating-orb orb-4"></div>
+                                <div class="floating-orb orb-5"></div>
+                            </div>
+                            
+                            <div class="code-preview" data-aos="zoom-in" data-aos-delay="600">
+                                <div class="code-header">
+                                    <div class="code-dots">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                    <span class="code-title">deploy.js</span>
+                                </div>
+                                <pre class="code-content"><code class="language-javascript">
+// Deploy global Postgres in 3 lines
+const neon = require('@neongrid/sdk');
+
+const db = await neon.databases.create('my-app', {
+    regions: ['global'],
+    scale: 'auto'
+});
+
+console.log('🚀 Database deployed globally!');
+                                </code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <section class="trust-bar">
+        <div class="container">
+            <p class="trust-title">Trusted by industry leaders</p>
+            <div class="trust-logos">
+                <div class="logo-item"><img src="https://via.placeholder.com/120x40/1a1a1a/ffffff?text=TECH+CORP" alt="Tech Corp"></div>
+                <div class="logo-item"><img src="https://via.placeholder.com/120x40/1a1a1a/ffffff?text=INNOVATE+INC" alt="Innovate Inc"></div>
+                <div class="logo-item"><img src="https://via.placeholder.com/120x40/1a1a1a/ffffff?text=GLOBAL+TECH" alt="Global Tech"></div>
+                <div class="logo-item"><img src="https://via.placeholder.com/120x40/1a1a1a/ffffff?text=FUTURE+LABS" alt="Future Labs"></div>
+                <div class="logo-item"><img src="https://via.placeholder.com/120x40/1a1a1a/ffffff?text=QUANTUM+AI" alt="Quantum AI"></div>
+                <div class="logo-item"><img src="https://via.placeholder.com/120x40/1a1a1a/ffffff?text=NEXUS+SYS" alt="Nexus Systems"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Enterprise-Grade Features</h2>
+                <p class="section-subtitle">Everything you need for mission-critical applications</p>
+            </div>
+            
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="ri-global-line"></i>
+                    </div>
+                    <h3 class="feature-title">Global Edge Network</h3>
+                    <p class="feature-description">
+                        Deploy across 200+ global edge locations with automatic data synchronization and failover.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="ri-check-line"></i> Automatic geo-replication</li>
+                        <li><i class="ri-check-line"></i> Intelligent routing</li>
+                        <li><i class="ri-check-line"></i> Multi-region consistency</li>
+                    </ul>
+                    <div class="feature-badge">New</div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="ri-shield-keyhole-line"></i>
+                    </div>
+                    <h3 class="feature-title">Quantum Encryption</h3>
+                    <p class="feature-description">
+                        Military-grade encryption with quantum-resistant algorithms and zero-trust architecture.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="ri-check-line"></i> End-to-end encryption</li>
+                        <li><i class="ri-check-line"></i> Quantum-safe cryptography</li>
+                        <li><i class="ri-check-line"></i> Compliance certifications</li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="ri-cpu-line"></i>
+                    </div>
+                    <h3 class="feature-title">AI Optimization</h3>
+                    <p class="feature-description">
+                        Self-healing databases with machine learning-driven performance optimization and predictive scaling.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="ri-check-line"></i> Automatic query optimization</li>
+                        <li><i class="ri-check-line"></i> Predictive scaling</li>
+                        <li><i class="ri-check-line"></i> Anomaly detection</li>
+                    </ul>
+                    <div class="feature-badge">AI</div>
+                </div>
+                
+                <!-- More features... -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Simple, Transparent Pricing</h2>
+                <p class="section-subtitle">Scale from startup to enterprise with predictable costs</p>
+            </div>
+            
+            <div class="pricing-toggle" data-aos="fade-up" data-aos-delay="100">
+                <span>Monthly</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="pricing-toggle">
+                    <span class="toggle-slider"></span>
+                </label>
+                <span>Annual <span class="discount-badge">Save 20%</span></span>
+            </div>
+            
+            <div class="pricing-grid">
+                <!-- Starter Plan -->
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pricing-header">
+                        <h3 class="plan-name">Starter</h3>
+                        <div class="plan-price">
+                            <span class="currency">$</span>
+                            <span class="amount">29</span>
+                            <span class="period">/month</span>
+                        </div>
+                        <p class="plan-description">Perfect for small projects and startups</p>
+                    </div>
+                    
+                    <ul class="plan-features">
+                        <li><i class="ri-check-line"></i> 10 GB Storage</li>
+                        <li><i class="ri-check-line"></i> 1 Million Requests</li>
+                        <li><i class="ri-check-line"></i> 3 Regions</li>
+                        <li><i class="ri-check-line"></i> Basic Support</li>
+                        <li><i class="ri-close-line"></i> Advanced Analytics</li>
+                        <li><i class="ri-close-line"></i> Custom Domains</li>
+                    </ul>
+                    
+                    <button class="btn btn-outline btn-block">Get Started</button>
+                </div>
+                
+                <!-- Pro Plan -->
+                <div class="pricing-card featured" data-aos="fade-up" data-aos-delay="300">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3 class="plan-name">Professional</h3>
+                        <div class="plan-price">
+                            <span class="currency">$</span>
+                            <span class="amount">99</span>
+                            <span class="period">/month</span>
+                        </div>
+                        <p class="plan-description">For growing businesses and teams</p>
+                    </div>
+                    
+                    <ul class="plan-features">
+                        <li><i class="ri-check-line"></i> 100 GB Storage</li>
+                        <li><i class="ri-check-line"></i> 10 Million Requests</li>
+                        <li><i class="ri-check-line"></i> 10 Regions</li>
+                        <li><i class="ri-check-line"></i> Priority Support</li>
+                        <li><i class="ri-check-line"></i> Advanced Analytics</li>
+                        <li><i class="ri-check-line"></i> Custom Domains</li>
+                    </ul>
+                    
+                    <button class="btn btn-primary btn-block">Start Free Trial</button>
+                </div>
+                
+                <!-- Enterprise Plan -->
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="pricing-header">
+                        <h3 class="plan-name">Enterprise</h3>
+                        <div class="plan-price">
+                            <span class="currency">$</span>
+                            <span class="amount">499</span>
+                            <span class="period">/month</span>
+                        </div>
+                        <p class="plan-description">For mission-critical applications</p>
+                    </div>
+                    
+                    <ul class="plan-features">
+                        <li><i class="ri-check-line"></i> Unlimited Storage</li>
+                        <li><i class="ri-check-line"></i> Unlimited Requests</li>
+                        <li><i class="ri-check-line"></i> Global Regions</li>
+                        <li><i class="ri-check-line"></i> 24/7 Premium Support</li>
+                        <li><i class="ri-check-line"></i> Advanced Analytics</li>
+                        <li><i class="ri-check-line"></i> SLA Guarantee</li>
+                    </ul>
+                    
+                    <button class="btn btn-outline btn-block">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Loved by Developers Worldwide</h2>
+                <p class="section-subtitle">See what our customers say about NeonGrid</p>
+            </div>
+            
+            <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card swiper-slide">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="ri-double-quotes-l"></i>
+                            </div>
+                            <p class="testimonial-text">
+                                "NeonGrid transformed our database infrastructure. We reduced latency by 80% 
+                                and improved reliability significantly. The global edge network is incredible!"
+                            </p>
+                            <div class="testimonial-author">
+                                <img src="https://via.placeholder.com/60x60/6366f1/ffffff?text=SR" alt="Sarah Rodriguez">
+                                <div class="author-info">
+                                    <h4>Sarah Rodriguez</h4>
+                                    <p>CTO, TechInnovate</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- More testimonials... -->
+                </div>
+                
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content" data-aos="zoom-in">
+                <h2 class="cta-title">Ready to Transform Your Database Infrastructure?</h2>
+                <p class="cta-subtitle">
+                    Join thousands of developers building the future with NeonGrid Pro
+                </p>
+                <div class="cta-actions">
+                    <button class="btn btn-primary btn-xl">
+                        <i class="ri-rocket-2-line"></i>
+                        Start Free Trial
+                    </button>
+                    <button class="btn btn-secondary btn-xl">
+                        <i class="ri-calendar-line"></i>
+                        Book Demo
+                    </button>
+                </div>
+                <p class="cta-note">No credit card required • 14-day free trial • Cancel anytime</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo-orb"></div>
+                    <span class="logo-text">NeonGrid Pro</span>
+                    <p class="footer-description">
+                        The ultimate Postgres platform for modern applications.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <!-- Footer links columns... -->
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 NeonGrid Technologies. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="ri-twitter-fill"></i></a>
+                    <a href="#"><i class="ri-github-fill"></i></a>
+                    <a href="#"><i class="ri-linkedin-fill"></i></a>
+                    <a href="#"><i class="ri-discord-fill"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swiper/10.0.4/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
